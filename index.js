@@ -1,11 +1,10 @@
-import type { Node, Parent } from "unist";
 import { u } from "unist-builder";
 import { visit } from "unist-util-visit";
 
 export default function remarkCallouts() {
-  return (tree: Node) => {
+  return (tree) => {
     // Traverse the Markdown AST and find blockquote nodes
-    visit(tree, "blockquote", (node: any, index: number, parent: Parent) => {
+    visit(tree, "blockquote", (node, index, parent) => {
       // Check for the callout pattern in the first line of the blockquote
       const cell = node.children?.[0]?.children?.[0];
       const regx = cell?.value?.trim().match(/^\[!(\w+)\]/s);
